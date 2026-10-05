@@ -1,0 +1,224 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Saaf Saathi</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f5f7f9;color:#14202b;font-family:system-ui,-apple-system,Segoe UI,Arial}header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid #e5e9ed;padding:12px 5%;display:flex;justify-content:space-between;align-items:center}.brand{display:flex;gap:10px;align-items:center}.brand>b{background:#0a8a76;color:white;border-radius:12px;padding:10px}.brand span{display:grid}.brand small{color:#7a838d}header a{background:#0a8a76;color:#fff;padding:10px 15px;border-radius:12px;font-weight:800;text-decoration:none}.banner,.hero,section,.booking{max-width:1180px;width:90%;margin:18px auto}.banner{padding:22px;border-radius:22px;background:linear-gradient(135deg,#fff7df,#eaf8f4);border:1px solid #eadfbd}.banner h3{margin:0 0 5px}.banner p{margin:0 0 10px;color:#69747e}.banner a{font-weight:900;color:#0a7565;text-decoration:none}.hero{background:#fff;border-radius:28px;padding:42px 6%;display:flex;justify-content:space-between;align-items:center;box-shadow:0 10px 35px #18263312}.hero label,.title label{font-size:11px;letter-spacing:1.5px;font-weight:900;color:#0a8a76}.hero h1{font-size:clamp(35px,5vw,60px);line-height:1.05;margin:8px 0}.hero em{color:#0a8a76;font-style:normal}.hero p{color:#6d7780;font-size:17px}.hero button,.booking button{border:0;background:#111b2c;color:#fff;padding:14px 20px;border-radius:13px;font-weight:900;font-size:15px;cursor:pointer}.heroicon{font-size:110px}.title{display:flex;justify-content:space-between;align-items:end;margin-bottom:14px}.title h2{margin:4px 0 0}.title small{color:#7a838d}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card{background:#fff;border:1px solid #e3e8ec;border-radius:18px;padding:17px;min-height:150px;display:flex;flex-direction:column;justify-content:space-between}.card .icon{font-size:28px}.card h3{margin:7px 0 3px;font-size:17px}.card p{margin:0;color:#7a838d;font-size:13px}.price{font-weight:900;margin-top:10px}.choose{margin-top:10px;width:100%;background:#111b2c;color:#fff;border:0;border-radius:10px;padding:10px;font-weight:800;cursor:pointer}.booking{background:#fff;padding:25px;border-radius:24px;border:1px solid #e3e8ec}.booking form{display:grid;grid-template-columns:1fr 1fr;gap:14px}.booking input,.booking select,.booking textarea{width:100%;padding:13px;border:1px solid #dbe1e6;border-radius:12px;font:inherit}.booking textarea{min-height:85px}.booking button,.summary{grid-column:1/-1}.summary{background:#f1f7f5;padding:13px;border-radius:12px;font-weight:800}.booking .title{margin-bottom:18px}footer{text-align:center;padding:30px;color:#7c858d;font-size:12px}@media(max-width:850px){.grid{grid-template-columns:1fr 1fr}.heroicon{font-size:75px}}@media(max-width:600px){.grid,.booking form{grid-template-columns:1fr}.heroicon{display:none}.hero h1{font-size:36px}.title{align-items:start;gap:8px;flex-direction:column}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><b>SS</b><span><strong>Saaf Saathi</strong><small>Cleaning & Care Services</small></span></div>
+  <a id="topwa" target="_blank">WhatsApp</a>
+</header>
+<main>
+  <section id="banner" class="banner"></section>
+  <section class="hero">
+    <div>
+      <label>SAFAI • CARE • CONVENIENCE</label>
+      <h1>Saaf ghar, saaf gaadi,<br><em>sukoon ki zindagi.</em></h1>
+      <p>Cleaning & washing services — easy booking on WhatsApp.</p>
+      <button onclick="goBook()">Book a Service</button>
+    </div>
+    <div class="heroicon">🚗</div>
+  </section>
+  <section>
+    <div class="title">
+      <span><label>CHOOSE WHAT YOU NEED</label><h2>Our Services</h2></span>
+      <small>Prices update from Google Sheet</small>
+    </div>
+    <div id="services" class="grid"></div>
+  </section>
+  <section>
+    <div class="title">
+      <span><label>SAVE MORE</label><h2>Monthly Car Care</h2></span>
+    </div>
+    <div id="monthly" class="grid"></div>
+  </section>
+  <section id="booking" class="booking">
+    <div class="title">
+      <span><label>QUICK BOOKING</label><h2>Book a Service</h2></span>
+      <small id="status">Loading…</small>
+    </div>
+    <form id="form">
+      <select id="service" required><option value="">Select service</option></select>
+      <input id="plan" placeholder="Plan / Option">
+      <input id="date" type="date" required>
+      <select id="slot" required>
+        <option value="">Select time slot</option>
+        <option>8:00 AM - 10:00 AM</option>
+        <option>10:00 AM - 12:00 PM</option>
+        <option>12:00 PM - 2:00 PM</option>
+        <option>2:00 PM - 4:00 PM</option>
+        <option>4:00 PM - 6:00 PM</option>
+      </select>
+      <input id="name" placeholder="Name" required>
+      <input id="mobile" placeholder="Mobile / WhatsApp" required>
+      <input id="area" placeholder="Area / City" required>
+      <textarea id="address" placeholder="Address" required></textarea>
+      <input id="vehicle" placeholder="Vehicle / Item">
+      <textarea id="notes" placeholder="Notes"></textarea>
+      <div id="summary" class="summary">Select a service to see price.</div>
+      <button type="submit" id="btnSubmit">Book & Continue to WhatsApp</button>
+    </form>
+  </section>
+</main>
+<footer>© Saaf Saathi • Cleaning & Care Services</footer>
+  <script>
+window.SAAF_CONFIG = {
+  googleAppsScriptUrl: "https://script.google.com/macros/s/AKfycbww5GXZEews_auLI6-OaIEz9vZCdlr6d3pSQ1WWwvrLvPg9561GBxuY0Rh3FSniwouA0g/exec",
+  whatsappNumber: "918140468416",
+  currency: "₹"
+};
+
+const C = window.SAAF_CONFIG;
+let services = [];
+let banners = [];
+const demo = [
+  ["CAR_EXT","Car Washing","Exterior Cleaning","One Time","Foam wash included"],
+  ["CAR_INT","Car Washing","Interior Cleaning","One Time","Interior cleaning"],
+  ["CAR_BOTH","Car Washing","Interior + Exterior Cleaning","One Time","Interior + exterior cleaning"],
+  ["BIKE","Bike Washing","Bike Wash","One Time","Bike cleaning"],
+  ["SOFA","Sofa Cleaning","Sofa Cleaning","One Time","Sofa cleaning"],
+  ["HOME","Home Cleaning","Home Cleaning","One Time","Home cleaning"],
+  ["SHIFT","Home Shifting","Home Shifting / Moving","Enquiry","Quotation based"],
+  ["MONTHLY_1","Monthly Car Care","Daily Wash + 2 Interior/Exterior + Foam","1 Month","1 Month plan"],
+  ["MONTHLY_3","Monthly Car Care","Daily Wash + 2 Interior/Exterior + Foam","3 Months","3 Months plan"],
+  ["MONTHLY_6","Monthly Car Care","Daily Wash + 2 Interior/Exterior + Foam","6 Months","6 Months plan"],
+  ["MONTHLY_12","Monthly Car Care","Daily Wash + 2 Interior/Exterior + Foam","12 Months","12 Months plan"]
+].map(x=>({Service_ID:x[0],Category:x[1],Service_Name:x[2],Plan:x[3],Description:x[4],Price:"",Active:"Yes"}));
+
+const el = id => document.getElementById(id);
+const esc = v => String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
+function wa(t){ return `https://wa.me/${C.whatsappNumber}?text=${encodeURIComponent(t)}`; }
+function goBook(){ el("booking").scrollIntoView({behavior:"smooth"}); }
+function price(s){ return s && s.Price!=='' && s.Price!=null ? C.currency+s.Price : "Price on request"; }
+function icon(c){ return ({"Car Washing":"🚗","Bike Washing":"🏍️","Sofa Cleaning":"🛋️","Home Cleaning":"🏠","Home Shifting":"📦","Monthly Car Care":"⭐"})[c]||"✨"; }
+
+function cleanServices(list){
+  return (Array.isArray(list)?list:[]).filter(s=>String(s.Service_ID||"").toUpperCase()!=="CAR_FOAM" && String(s.Active??"").toLowerCase()!="no");
+}
+
+function draw(){
+  const normal = services.filter(s=>String(s.Category)!=="Monthly Car Care");
+  const monthly = services.filter(s=>String(s.Category)==="Monthly Car Care");
+  
+  el("services").innerHTML = normal.map(s=>`
+    <div class="card">
+      <div>
+        <div class="icon">${icon(s.Category)}</div>
+        <h3>${esc(s.Service_Name)}</h3>
+        <p>${esc(s.Description||s.Category)}</p>
+      </div>
+      <div>
+        <div class="price">${price(s)}</div>
+        <button type="button" class="choose" onclick="pick('${esc(s.Service_ID)}')">Choose</button>
+      </div>
+    </div>`).join("");
+
+  el("monthly").innerHTML = monthly.map(s=>`
+    <div class="card">
+      <div>
+        <div class="icon">⭐</div>
+        <h3>${esc(s.Plan||s.Service_Name)}</h3>
+        <p>${esc(s.Service_Name||"Monthly Car Care")}</p>
+      </div>
+      <div>
+        <div class="price">${price(s)}</div>
+        <button type="button" class="choose" onclick="pick('${esc(s.Service_ID)}')">Choose Plan</button>
+      </div>
+    </div>`).join("");
+
+  el("service").innerHTML = '<option value="">Select service</option>' + services.map(s=>`<option value="${esc(s.Service_ID)}">${esc(s.Service_Name)}${s.Plan?" — "+esc(s.Plan):""}</option>`).join("");
+}
+
+function pick(id){
+  const s = services.find(x=>String(x.Service_ID)===String(id));
+  if(!s) return;
+  el("service").value = id;
+  el("plan").value = s.Plan||"";
+  el("summary").textContent = `${s.Service_Name} • ${s.Plan||""} • ${price(s)}`;
+  goBook();
+}
+
+async function load(){
+  services = demo.slice();
+  el("status").textContent = "Loading services…";
+  draw();
+  try {
+    const r = await fetch(C.googleAppsScriptUrl + "?action=data&ts=" + Date.now(), {redirect:"follow"});
+    const d = await r.json();
+    if(!d.success) throw new Error(d.error||"API error");
+    const incoming = cleanServices(d.data && d.data.services);
+    if(incoming.length) services = incoming;
+    banners = Array.isArray(d.data && d.data.banners) ? d.data.banners : [];
+    el("status").textContent = "Google Sheet connected";
+  } catch(e) {
+    el("status").textContent = "Saved services shown • Sheet connection unavailable";
+    banners = [{Title:"Saaf Saathi", Subtitle:"Services and prices are managed from Google Sheet", Button_Text:"Enquire on WhatsApp", WhatsApp_Message:"Hello Saaf Saathi, I want to enquire about your services."}];
+  }
+  draw();
+  const b = banners[0];
+  if(b){
+    el("banner").innerHTML = `<h3>${esc(b.Title||"Saaf Saathi")}</h3><p>${esc(b.Subtitle||"")}</p><a target="_blank" href="${wa(b.WhatsApp_Message||"Hello Saaf Saathi, I want to enquire.")}">${esc(b.Button_Text||"Enquire on WhatsApp")} →</a>`;
+  }
+}
+
+el("service").onchange = () => {
+  const s = services.find(x=>String(x.Service_ID)===String(el("service").value));
+  el("plan").value = s?.Plan||"";
+  el("summary").textContent = s ? `${s.Service_Name} • ${s.Plan||""} • ${price(s)}` : "Select a service to see price.";
+};
+
+el("topwa").href = wa("Hello Saaf Saathi, I want to enquire about your services.");
+el("date").min = new Date().toISOString().split("T")[0];
+
+el("form").onsubmit = async e => {
+  e.preventDefault();
+  const btn = el("btnSubmit");
+  btn.disabled = true;
+  btn.textContent = "Processing Booking...";
+  
+  const s = services.find(x=>String(x.Service_ID)===String(el("service").value));
+  if(!s) {
+    btn.disabled = false;
+    btn.textContent = "Book & Continue to WhatsApp";
+    return alert("Please select a service.");
+  }
+  
+  const v = id => el(id).value.trim();
+  const d = {
+    Name: v("name"), Mobile: v("mobile"), WhatsApp: v("mobile"), Area: v("area"), City: v("area"), Address: v("address"),
+    Service_ID: s.Service_ID, Category: s.Category, Service_Name: s.Service_Name, Plan: v("plan")||s.Plan||"", Price: s.Price??"",
+    Service_Date: v("date"), Time_Slot: v("slot"), Vehicle_Item: v("vehicle"), Notes: v("notes"), Payment_Status: "Pending", Status: "New"
+  };
+  
+  const localId = "SS-" + Date.now();
+  const waMessage = wa(`Saaf Saathi Booking\n\nBooking ID: ${localId}\nName: ${d.Name}\nMobile: ${d.Mobile}\nService: ${d.Service_Name}\nPlan: ${d.Plan}\nPrice: ${price(s)}\nDate: ${d.Service_Date}\nTime: ${d.Time_Slot}\nArea: ${d.Area}\nAddress: ${d.Address}\nVehicle/Item: ${d.Vehicle_Item||"-"}\nNotes: ${d.Notes||"-"}`);
+
+  // Background Post to Google Sheet
+  try {
+    fetch(C.googleAppsScriptUrl, {
+      method: "POST",
+      headers: {"Content-Type": "text/plain;charset=utf-8"},
+      body: JSON.stringify(d),
+      mode: "no-cors"
+    });
+  } catch(_) { }
+
+  // Fallback Link Display & Direct Redirect
+  el("summary").innerHTML = `<span style="color:#0a8a76;">Booking Created!</span> <a href="${waMessage}" target="_blank" style="display:inline-block;margin-top:5px;background:#0a8a76;color:#fff;padding:8px 12px;border-radius:8px;text-decoration:none;">Click here to Open WhatsApp</a>`;
+  
+  setTimeout(() => {
+    window.open(waMessage, "_blank");
+    btn.disabled = false;
+    btn.textContent = "Book & Continue to WhatsApp";
+  }, 300);
+};
+
+load();
+</script>
+</body>
+</html>
